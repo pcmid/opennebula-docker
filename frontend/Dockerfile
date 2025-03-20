@@ -17,5 +17,6 @@ RUN apt-get update \
 
 COPY entrypoint.sh /entrypoint.sh
 COPY oneadmin.sh /oneadmin.sh
+COPY init.sh /init.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

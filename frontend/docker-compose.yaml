@@ -1,0 +1,49 @@
+name: opennebula
+
+x-common-volumes: &common-volumes
+  volumes:
+    - ./one/data:/var/lib/one
+    - ./one/log:/var/log/one
+    - ./one/conf:/etc/one
+    - ./one/lock:/run/lock/one
+    - ./one/run:/run/one
+    - ./one/ssh:/etc/ssh
+
+x-common-settings: &service-settings
+  build: .
+  image: opennebula:latest
+  network_mode: host
+  init: true
+  <<: *common-volumes
+
+services:
+  init-container:
+    command: init
+    <<: *service-settings
+  oned:
+    container_name: oned
+    command: oned
+    <<: *service-settings
+  scheduler:
+    container_name: scheduler
+    command: scheduler
+    <<: *service-settings
+  onehem:
+    container_name: onehem
+    command: onehem
+    <<: *service-settings
+  oneflow:
+    container_name: oneflow
+    command: oneflow
+    <<: *service-settings
+  onegate:
+    container_name: onegate
+    command: onegate
+    <<: *service-settings
+  fireedge:
+    container_name: fireedge
+    command: fireedge
+    <<: *service-settings
+
+
+

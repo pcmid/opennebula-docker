@@ -1,0 +1,4 @@
+name: opennebula
+services:
+  init-container:
+    profiles: ["disabled"]

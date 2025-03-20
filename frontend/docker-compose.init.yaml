@@ -1,0 +1,14 @@
+name: opennebula
+services:
+  oned:
+    profiles: ["disabled"]
+  scheduler:
+    profiles: ["disabled"]
+  onehem:
+    profiles: ["disabled"]
+  oneflow:
+    profiles: ["disabled"]
+  onegate:
+    profiles: ["disabled"]
+  fireedge:
+    profiles: ["disabled"]
