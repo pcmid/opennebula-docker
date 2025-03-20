@@ -12,13 +12,6 @@ fi
 
 chown -R oneadmin:oneadmin /var/log/one /var/lib/one /etc/one /run/one/ /run/lock/one
 
-if [ ! -s /etc/ssh/sshd_config ]; then
-    cat > /etc/ssh/sshd_config <<EOF
-Port 2222
-UsePAM yes
-EOF
-fi
-
 if [[ ! -f /etc/ssh/ssh_host_ecdsa_key ||
       ! -f /etc/ssh/ssh_host_ecdsa_key.pub ||
       ! -f /etc/ssh/ssh_host_ed25519_key ||

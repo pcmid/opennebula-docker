@@ -2,12 +2,12 @@ name: opennebula
 
 x-common-volumes: &common-volumes
   volumes:
-    - ./one/data:/var/lib/one
-    - ./one/log:/var/log/one
-    - ./one/conf:/etc/one
-    - ./one/lock:/run/lock/one
-    - ./one/run:/run/one
-    - ./one/ssh:/etc/ssh
+    - /var/lib/one:/var/lib/one
+    - /var/log/one:/var/log/one
+    - /etc/one:/etc/one
+    - /run/lock/one:/run/lock/one
+    - /run/one:/run/one
+    - /etc/ssh:/etc/ssh:ro
 
 x-common-settings: &service-settings
   build: .

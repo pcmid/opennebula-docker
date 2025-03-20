@@ -1,16 +1,18 @@
 # OpenNebula Frontend
 
+## initialize the config and database
 ```bash
-# initialize the config and database
 docker compose -f docker-compose.yaml -f docker-compose.init.yaml up 
 ```
+
+## edit your config
 ```bash
-# edit your config
-vim one/etc/one/oned.conf
+
+vim /etc/one/oned.conf
 ...
 ```
 
+## start the frontend
 ```bash
-# start the frontend
-docker compose -f docker-compose.yaml -f docker-compose.init.yaml up 
+docker compose -f docker-compose.yaml -f docker-compose.main.yaml up 
 ```

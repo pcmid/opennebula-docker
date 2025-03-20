@@ -11,13 +11,6 @@ if [ -z "$(ls -A /var/lib/one)" ]; then
   echo ">> You must edit the password in /var/lib/one/.one/one_auth"
 fi
 
-if [ ! -s /etc/ssh/sshd_config ]; then
-    cat > /etc/ssh/sshd_config <<EOF
-Port 2222
-UsePAM yes
-EOF
-fi
-
 if [[ ! -f /etc/ssh/ssh_host_ecdsa_key ||
       ! -f /etc/ssh/ssh_host_ecdsa_key.pub ||
       ! -f /etc/ssh/ssh_host_ed25519_key ||
