@@ -7,7 +7,7 @@ if [ -z "$(ls -A /var/lib/one)" ]; then
   echo "Initializing OpenNebula data..."
   cp -r /var/lib/one.dist/* /var/lib/one/
   cp -r /var/lib/one.dist/.one /var/lib/one/
-  echo 'oneadmin:0neadm1n' >> /var/lib/one/.one/one_auth
+  echo 'oneadmin:0neadm1n' > /var/lib/one/.one/one_auth
   echo ">> You must edit the password in /var/lib/one/.one/one_auth"
 fi
 
