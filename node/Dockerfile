@@ -1,0 +1,40 @@
+FROM debian:bookworm
+
+ENV container=docker
+ENV LC_ALL=C
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get -y install systemd systemd-sysv \
+    && apt-get -y install gnupg wget apt-transport-https \
+    && wget -q -O- https://downloads.opennebula.io/repo/repo2.key | gpg --dearmor --yes --output /etc/apt/keyrings/opennebula.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/6.10/Debian/12 stable opennebula" > /etc/apt/sources.list.d/opennebula.list \
+    && apt-get update \
+    && apt-get -y install opennebula-node-kvm \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && rm -rf /etc/ssh/ssh_host_*
+
+RUN cd /lib/systemd/system/sysinit.target.wants/ \
+    && rm $(ls | grep -v systemd-tmpfiles-setup) \
+    && cd /lib/systemd/system/multi-user.target.wants/ \
+    && rm $(ls | grep -v systemd-logind.service | grep -v systemd-user-sessions.service)
+
+RUN rm -f /etc/systemd/system/*.wants/* \
+    /lib/systemd/system/local-fs.target.wants/* \
+    /lib/systemd/system/sockets.target.wants/*udev* \
+    /lib/systemd/system/sockets.target.wants/*initctl* \
+    /lib/systemd/system/basic.target.wants/* \
+    /lib/systemd/system/anaconda.target.wants/* \
+    /lib/systemd/system/plymouth* \
+    /lib/systemd/system/systemd-update-utmp*
+
+RUN cp -r /var/lib/one /var/lib/one.dist \
+    && systemctl enable ssh.service libvirtd.service
+    #&& echo "d /run/sshd 0755 root root" > /usr/lib/tmpfiles.d/sshd.conf \
+
+VOLUME [ "/sys/fs/cgroup" ]
+
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/lib/systemd/systemd"]

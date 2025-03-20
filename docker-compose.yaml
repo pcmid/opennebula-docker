@@ -1,0 +1,85 @@
+services:
+  oned:
+    build: .
+    image: opennebula:latest
+    container_name: oned
+    command: oned
+    network_mode: host
+    init: true
+    volumes:
+      - ./one/data:/var/lib/one
+      - ./one/log:/var/log/one
+      - ./one/conf:/etc/one
+      - ./one/lock:/run/lock/one
+      - ./one/run:/run/one
+      - ./one/ssh:/etc/ssh
+  scheduler:
+    build: .
+    image: opennebula:latest
+    container_name: scheduler
+    command: scheduler
+    network_mode: host
+    init: true
+    volumes:
+      - ./one/data:/var/lib/one
+      - ./one/log:/var/log/one
+      - ./one/conf:/etc/one
+      - ./one/lock:/run/lock/one
+      - ./one/run:/run/one
+      - ./one/ssh:/etc/ssh
+  onehem:
+    build: .
+    image: opennebula:latest
+    container_name: onehem
+    command: onehem
+    network_mode: host
+    init: true
+    volumes:
+      - ./one/data:/var/lib/one
+      - ./one/log:/var/log/one
+      - ./one/conf:/etc/one
+      - ./one/lock:/run/lock/one
+      - ./one/run:/run/one
+      - ./one/ssh:/etc/ssh
+  oneflow:
+    build: .
+    image: opennebula:latest
+    container_name: oneflow
+    command: oneflow
+    network_mode: host
+    init: true
+    volumes:
+      - ./one/data:/var/lib/one
+      - ./one/log:/var/log/one
+      - ./one/conf:/etc/one
+      - ./one/lock:/run/lock/one
+      - ./one/run:/run/one
+      - ./one/ssh:/etc/ssh
+  onegate:
+    build: .
+    image: opennebula:latest
+    container_name: onegate
+    command: onegate
+    network_mode: host
+    init: true
+    volumes:
+      - ./one/data:/var/lib/one
+      - ./one/log:/var/log/one
+      - ./one/conf:/etc/one
+      - ./one/lock:/run/lock/one
+      - ./one/run:/run/one
+      - ./one/ssh:/etc/ssh
+  fireedge:
+    build: .
+    image: opennebula:latest
+    container_name: fireedge
+    command: fireedge
+    network_mode: host
+    init: true
+    volumes:
+      - ./one/data:/var/lib/one
+      - ./one/log:/var/log/one
+      - ./one/conf:/etc/one
+      - ./one/lock:/run/lock/one
+      - ./one/run:/run/one
+      - ./one/ssh:/etc/ssh
