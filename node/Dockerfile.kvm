@@ -31,7 +31,6 @@ RUN rm -f /etc/systemd/system/*.wants/* \
 
 RUN cp -r /var/lib/one /var/lib/one.dist \
     && systemctl enable ssh.service libvirtd.service
-    #&& echo "d /run/sshd 0755 root root" > /usr/lib/tmpfiles.d/sshd.conf \
 
 VOLUME [ "/sys/fs/cgroup" ]
 

@@ -7,7 +7,7 @@ if [ -z "$(ls -A /var/lib/one)" ]; then
   echo "Initializing OpenNebula data..."
   cp -r /var/lib/one.dist/* /var/lib/one/
   cp -r /var/lib/one.dist/.one /var/lib/one/
-  echo 'oneadmin:0neadm1n' > /var/lib/one/.one/one_auth
+  echo 'oneadmin:oneadmin' > /var/lib/one/.one/one_auth
   echo ">> You must edit the password in /var/lib/one/.one/one_auth"
 fi
 
@@ -19,6 +19,25 @@ if [[ ! -f /etc/ssh/ssh_host_ecdsa_key ||
       ! -f /etc/ssh/ssh_host_rsa_key.pub ]]; then
    ssh-keygen -A
 fi
+
+cat > /etc/ssh/sshd_config <<EOF
+Port 2200
+PermitRootLogin no
+PasswordAuthentication no
+AuthorizedKeysFile	.ssh/authorized_keys
+UsePAM yes
+UseDNS no
+EOF
+
+cat > /etc/ssh/ssh_config <<EOF
+Host *
+    StrictHostKeyChecking accept-new
+
+Host $(hostname)
+    Port 2200
+EOF
+
+
 
 # Generate Ed25519 key for oneadmin user
 if [[ ! -f /var/lib/one/.ssh/id_ed25519 ]]; then

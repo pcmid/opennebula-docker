@@ -2,12 +2,12 @@ name: opennebula
 
 x-common-volumes: &common-volumes
   volumes:
-    - /var/lib/one:/var/lib/one
-    - /var/log/one:/var/log/one
-    - /etc/one:/etc/one
-    - /run/lock/one:/run/lock/one
-    - /run/one:/run/one
-    - /etc/ssh:/etc/ssh:ro
+    - ./one/data:/var/lib/one
+    - ./one/conf:/etc/one
+    - ./one/ssh:/etc/ssh
+    - ./one/log:/var/log/one
+    - ./one/lock:/run/lock/one
+    - ./one/run:/run/one
 
 x-common-settings: &service-settings
   build: .
@@ -43,6 +43,10 @@ services:
   fireedge:
     container_name: fireedge
     command: fireedge
+    <<: *service-settings
+  sshd:
+    container_name: sshd
+    command: sshd
     <<: *service-settings
 
 

@@ -38,7 +38,8 @@ case $1 in
     wait
     ;;
   fireedge)
-    /usr/bin/fireedge-server start
+    LD_LIBRARY_PATH=/usr/share/one/guacd/lib /usr/share/one/guacd/sbin/guacd $OPTS
+    node /usr/lib/one/fireedge/dist/index.js >>/var/log/one/fireedge.log 2>>/var/log/one/fireedge.error &
     until [ -f /var/log/one/fireedge.log ]; do sleep 1; done
     tail -f /var/log/one/fireedge.log &
     trap "rm -f /run/lock/one/.fireedge.lock; rm -f /run/one/fireedge.pid; rm -f /run/one/guacd.pid; exit 0" TERM INT EXIT

@@ -12,3 +12,5 @@ services:
     profiles: ["disabled"]
   fireedge:
     profiles: ["disabled"]
+  sshd:
+    profiles: ["disabled"]
