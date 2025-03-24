@@ -34,7 +34,7 @@ Host *
     StrictHostKeyChecking accept-new
 
 Host $(hostname)
-    Port 2200
+    Port 2201
 EOF
 
 

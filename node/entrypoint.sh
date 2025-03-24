@@ -24,6 +24,11 @@ UseDNS no
 EOF
 fi
 
+cat > /etc/ssh/ssh_config <<EOF
+Host *
+    StrictHostKeyChecking accept-new
+EOF
+
 if [[ ! -f /etc/ssh/ssh_host_ecdsa_key ||
       ! -f /etc/ssh/ssh_host_ecdsa_key.pub ||
       ! -f /etc/ssh/ssh_host_ed25519_key ||
